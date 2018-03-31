@@ -71,18 +71,28 @@ class ManufacturerController extends Controller
 
         /* Method PATCH */
         if ($method === 'PATCH') {
+
+            $edited = false;
+
             /* Update name */
             if ($name != null && $name != '') {
                 $manufacturer->name = $name;
+                $edited = true;
             }
 
             /* Update website */
             if ($website != null && $website != '') {
                 $manufacturer->website = $website;
+                $edited = true;
             }
 
-            $manufacturer->save();
-            return response()->json(['msg' => 'Manufacturer \'s record ' . $id . ' edit with PATCH'], 200);
+            if ($edited) {
+                $manufacturer->save();
+                return response()->json(['msg' => 'Manufacturer \'s record ' . $id . ' edit with PATCH'], 200);
+            }
+            else{
+                return response()->json(['msg' =>'There wasn\'t changes']);
+            }
         }
 
         /* Method PUT */
