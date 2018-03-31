@@ -15,7 +15,14 @@ $router->get('/', function () use ($router) {
     return $router->app->version();
 });
 
+/* Generating key for App */
+$router->get('/key', function() {
+    return str_random(32);
+});
+
 $router->group(['prefix' => 'api'], function () use ($router) {
+
+    /* Manufacturers */
     $router->get('manufacturers',  ['uses' => 'ManufacturerController@index']);
 
     $router->get('manufacturers/{id}', ['uses' => 'ManufacturerController@show']);
@@ -27,4 +34,17 @@ $router->group(['prefix' => 'api'], function () use ($router) {
     $router->put('manufacturers/{id}', ['uses' => 'ManufacturerController@update']);
 
     $router->patch('manufacturers/{id}', ['uses' => 'ManufacturerController@update']);
+
+    /* Vehicles */
+    $router->get('manufacturers/{manufacturer_id}/vehicles',  ['uses' => 'VehicleController@index']);
+
+    $router->get('manufacturers/{manufacturer_id}/vehicles/{id}', ['uses' => 'VehicleController@show']);
+
+    $router->post('manufacturers/{manufacturer_id}/vehicles', ['uses' => 'VehicleController@create']);
+
+    $router->delete('manufacturers/{manufacturer_id}/vehicles/{id}', ['uses' => 'VehicleController@delete']);
+
+    $router->put('manufacturers/{manufacturer_id}/vehicles/{id}', ['uses' => 'VehicleController@update']);
+
+    $router->patch('manufacturers/{manufacturer_id}/vehicles/{id}', ['uses' => 'VehicleController@update']);
 });
