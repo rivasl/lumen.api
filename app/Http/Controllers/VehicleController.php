@@ -8,10 +8,6 @@ use Illuminate\Http\Request;
 
 class VehicleController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth.basic', ['only' => 'store']);
-    }
 
     /**
      * Display a listing of the resource.
@@ -31,22 +27,12 @@ class VehicleController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create($manufacturer_id)
-    {
-        return "Mostrando formulario para crear vehiculo del fabricante $manufacturer_id";
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $manufacturer_id)
+    public function create(Request $request, $manufacturer_id)
     {
         if (!$request->get('model') || !$request->get('color'))
             return response()->json(['msg' => 'Datos incompletos'], 422);
@@ -79,17 +65,6 @@ class VehicleController extends Controller
             return response()->json(['data' => $vehicle], 200);
         else
             return response()->json(['msg' => 'Manufacturer without vehicles'], 404);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($manufacturer_id, $vehicle_id)
-    {
-        return "Editando el vehiculo $vehicle_id del fabricante $manufacturer_id";
     }
 
     /**
@@ -161,7 +136,7 @@ class VehicleController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($manufacturer_id, $vehicle_id)
+    public function delete($manufacturer_id, $vehicle_id)
     {
         $manufacturer = Manufacturer::find($manufacturer_id);
         if (!$manufacturer) {
