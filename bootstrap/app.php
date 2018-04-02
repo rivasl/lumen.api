@@ -82,6 +82,9 @@ $app->singleton(
 // $app->register(App\Providers\AuthServiceProvider::class);
 // $app->register(App\Providers\EventServiceProvider::class);
 
+// Add support for command php artisan route:list in Lumen
+$app->register(Appzcoder\LumenRoutesList\RoutesCommandServiceProvider::class);
+
 /*
 |--------------------------------------------------------------------------
 | Load The Application Routes
