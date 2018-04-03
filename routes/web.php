@@ -16,14 +16,17 @@ $router->get('/', function () use ($router) {
 });
 
 /* Generating key for App */
-$router->get('/key', function() {
+$router->get('/key', function () {
     return str_random(32);
 });
+
+
+//$router->get('p', ['middleware'=>'auth', 'uses' => 'ManufacturerController@index']);
 
 $router->group(['prefix' => 'api'], function () use ($router) {
 
     /* Manufacturers */
-    $router->get('manufacturers',  ['uses' => 'ManufacturerController@index']);
+    $router->get('manufacturers', ['uses' => 'ManufacturerController@index']);
 
     $router->get('manufacturers/{id}', ['uses' => 'ManufacturerController@show']);
 
@@ -36,7 +39,7 @@ $router->group(['prefix' => 'api'], function () use ($router) {
     $router->patch('manufacturers/{id}', ['uses' => 'ManufacturerController@update']);
 
     /* Vehicles */
-    $router->get('manufacturers/{manufacturer_id}/vehicles',  ['uses' => 'VehicleController@index']);
+    $router->get('manufacturers/{manufacturer_id}/vehicles', ['uses' => 'VehicleController@index']);
 
     $router->get('manufacturers/{manufacturer_id}/vehicles/{id}', ['uses' => 'VehicleController@show']);
 

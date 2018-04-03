@@ -7,6 +7,14 @@ use Illuminate\Http\Request;
 
 class ManufacturerController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth', ['only' =>
+            'create',
+            'update',
+            'delete'
+        ]);
+    }
 
     /**
      * Display a listing of the resource.
@@ -89,9 +97,8 @@ class ManufacturerController extends Controller
             if ($edited) {
                 $manufacturer->save();
                 return response()->json(['msg' => 'Manufacturer \'s record ' . $id . ' edit with PATCH'], 200);
-            }
-            else{
-                return response()->json(['msg' =>'There wasn\'t changes']);
+            } else {
+                return response()->json(['msg' => 'There wasn\'t changes']);
             }
         }
 
