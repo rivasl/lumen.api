@@ -85,6 +85,8 @@ $app->singleton(
 // Add support for command php artisan route:list in Lumen
 $app->register(Appzcoder\LumenRoutesList\RoutesCommandServiceProvider::class);
 
+$app->register(Laravel\Passport\PassportServiceProvider::class);
+
 /*
 |--------------------------------------------------------------------------
 | Load The Application Routes
