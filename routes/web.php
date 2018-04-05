@@ -22,6 +22,7 @@ $router->get('/key', function () {
 
 
 //$router->get('p', ['middleware'=>'auth', 'uses' => 'ManufacturerController@index']);
+//$router->group(['prefix' => 'api', 'middleware'=>'auth'], function () use ($router) {
 
 $router->group(['prefix' => 'api'], function () use ($router) {
 
@@ -30,24 +31,24 @@ $router->group(['prefix' => 'api'], function () use ($router) {
 
     $router->get('manufacturers/{id}', ['uses' => 'ManufacturerController@show']);
 
-    $router->post('manufacturers', ['uses' => 'ManufacturerController@create']);
+    $router->post('manufacturers', ['middleware'=>'auth', 'uses' => 'ManufacturerController@create']);
 
-    $router->delete('manufacturers/{id}', ['uses' => 'ManufacturerController@delete']);
+    $router->delete('manufacturers/{id}', ['middleware'=>'auth', 'uses' => 'ManufacturerController@delete']);
 
-    $router->put('manufacturers/{id}', ['uses' => 'ManufacturerController@update']);
+    $router->put('manufacturers/{id}', ['middleware'=>'auth', 'uses' => 'ManufacturerController@update']);
 
-    $router->patch('manufacturers/{id}', ['uses' => 'ManufacturerController@update']);
+    $router->patch('manufacturers/{id}', ['middleware'=>'auth', 'middleware'=>'auth', 'uses' => 'ManufacturerController@update']);
 
     /* Vehicles */
     $router->get('manufacturers/{manufacturer_id}/vehicles', ['uses' => 'VehicleController@index']);
 
     $router->get('manufacturers/{manufacturer_id}/vehicles/{id}', ['uses' => 'VehicleController@show']);
 
-    $router->post('manufacturers/{manufacturer_id}/vehicles', ['uses' => 'VehicleController@create']);
+    $router->post('manufacturers/{manufacturer_id}/vehicles', ['middleware'=>'auth', 'uses' => 'VehicleController@create']);
 
-    $router->delete('manufacturers/{manufacturer_id}/vehicles/{id}', ['uses' => 'VehicleController@delete']);
+    $router->delete('manufacturers/{manufacturer_id}/vehicles/{id}', ['middleware'=>'auth', 'uses' => 'VehicleController@delete']);
 
-    $router->put('manufacturers/{manufacturer_id}/vehicles/{id}', ['uses' => 'VehicleController@update']);
+    $router->put('manufacturers/{manufacturer_id}/vehicles/{id}', ['middleware'=>'auth', 'uses' => 'VehicleController@update']);
 
-    $router->patch('manufacturers/{manufacturer_id}/vehicles/{id}', ['uses' => 'VehicleController@update']);
+    $router->patch('manufacturers/{manufacturer_id}/vehicles/{id}', ['middleware'=>'auth', 'uses' => 'VehicleController@update']);
 });

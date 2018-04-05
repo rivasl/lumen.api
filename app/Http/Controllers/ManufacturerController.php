@@ -7,14 +7,15 @@ use Illuminate\Http\Request;
 
 class ManufacturerController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth', ['only' =>
-            'create',
-            'update',
-            'delete'
-        ]);
-    }
+//    TODO: INVESTIGAR O CONSULTAR PORQUE ESTA SECCION NO FUNCIONO
+//    public function __construct()
+//    {
+//        $this->middleware('auth', ['only' =>
+//            'create',
+//            'update',
+//            'delete'
+//        ]);
+//    }
 
     /**
      * Display a listing of the resource.
