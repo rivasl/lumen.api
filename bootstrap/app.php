@@ -63,9 +63,9 @@ $app->singleton(
 //    App\Http\Middleware\ExampleMiddleware::class
 // ]);
 
-// $app->routeMiddleware([
-//     'auth' => App\Http\Middleware\Authenticate::class,
-// ]);
+ $app->routeMiddleware([
+     'auth' => App\Http\Middleware\Authenticate::class,
+ ]);
 
 /*
 |--------------------------------------------------------------------------
@@ -78,12 +78,13 @@ $app->singleton(
 |
 */
 
-// $app->register(App\Providers\AppServiceProvider::class);
-// $app->register(App\Providers\AuthServiceProvider::class);
 // $app->register(App\Providers\EventServiceProvider::class);
-
-// Add support for command php artisan route:list in Lumen
-$app->register(Appzcoder\LumenRoutesList\RoutesCommandServiceProvider::class);
+// $app->register(App\Providers\AppServiceProvider::class);
+$app->register(App\Providers\AuthServiceProvider::class);
+$app->register(Laravel\Passport\PassportServiceProvider::class);
+$app->register(Dusterio\LumenPassport\PassportServiceProvider::class); // Register Lumen adapter
+$app->register(Appzcoder\LumenRoutesList\RoutesCommandServiceProvider::class);  // Route list in Lumen
+$app->register(Appzcoder\LumenRoutesList\RoutesCommandServiceProvider::class); // Support route:list in Lumen
 
 /*
 |--------------------------------------------------------------------------
@@ -101,5 +102,13 @@ $app->router->group([
 ], function ($router) {
     require __DIR__.'/../routes/web.php';
 });
+
+/*
+|--------------------------------------------------------------------------
+|
+| Loading config file ('auth')
+|--------------------------------------------------------------------------
+*/
+$app->configure('auth');
 
 return $app;

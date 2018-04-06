@@ -20,7 +20,9 @@ $router->get('/key', function() {
     return str_random(32);
 });
 
-$router->group(['prefix' => 'api'], function () use ($router) {
+$router->group(['middleware' => 'auth:api', 'prefix' => 'api'], function() use ($router){
+
+    //$router->group(['prefix' => 'api'], function () use ($router) {
 
     /* Manufacturers */
     $router->get('manufacturers',  ['uses' => 'ManufacturerController@index']);
